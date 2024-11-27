@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- Nav bar -->
+    <div class="d-flex align-items-center f-nav-p justify-content-between px-4 py-2">
+        <div class="d-flex">
+            <div>
+                <img src="https://img.icons8.comsize0&id=24934&format=png&color=000000" alt=""
+                    class="jordan-sizing">
+            </div>
+            <!-- <div>
+                <ul class="list-decoration">
+                    <li id="deliveryto"></li>
+                </ul>
+            </div> -->
+        </div>
+
+        <!-- <ul class="d-flex align-items-center gap-4 list-decoration">
+            <li><a href="#" class="text-decoration-none text-dark">Find a Store</a></li> |
+            <li onclick="getfiltercategory()"><a href="#" data-bs-toggle="offcanvas"
+                    class="text-decoration-none text-dark" data-bs-target="#filterOffcanvas"
+                    aria-controls="filterOffcanvas">Filter</a></li> |
+            <li onclick="gotoCart()"><i class="fa fa-shopping-cart" style="font-size:24px"></i></li> | -->
+
+            <div class="dropdown">
+                <!-- <button class="remove-button-style" id="account" data-bs-toggle="dropdown" aria-expanded="false"><i
+                        class="fa fa-user-circle-o" style="font-size:24px"></i></button>
+                <ul class="dropdown-menu">
+                    <li onclick="buyerDashboard()"><a class="dropdown-item">Manage profile</a></li>
+                    <li><a class="dropdown-item" href="#">Orders</a></li>
+                    <li onclick="gotosettings()"><a class="dropdown-item" href="#">Settings</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li onclick="logOut()"><a class="dropdown-item" href="#">Logout</a></li>
+                </ul> -->
+            </div>
+        </ul>
+    </div>
+    <!--  -->
+
+    <div class="settings-sizing d-flex container pt-3">
+        <!-- Sidebar Content -->
+        <div class="sidebar ">
+            <div class="settings-profile-name d-flex">
+                <span><img
+                        src="https://static-assets-web.flixart.com/fk-p-linchpin-web/k-cp-zion/imofile-pic-male_4811a1.svg"
+                        class="p-3" alt=""></span>
+                <div class="pt-3">
+                
+                    <div id="settings-name-container" class="fw-bold"></div>
+                </div>
+            </div>
+            <div class="pt-3">
+                <div class="pt-3 settings-side-nav">
+                    <div style="border-bottom: 3px solid rgb(246,246,246);" class="pb-4">
+                        <span class="settings-my-order"><img
+                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHcDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDI0IDE4Ij48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC04LjY5NCAtMTEpIj48ZWxsaXBzZSBjeD0iMjAuNTU3IiBjeT0iMjAiIHJ4PSIyMC41NTciIHJ5PSIyMCIvPjxwYXRoIGZpbGw9IiMyODc0RjEiIGQ9Ik05IDExdjE3LjEwOGMwIC40OTMuNDEuODkyLjkxOC44OTJoNC45M3YtNS4yNTdoLTMuMDMzbDQuOTEyLTQuNzcgNC45NzIgNC44M2gtMy4wMzVWMjloMTIuNDE3Yy41MDcgMCAuOTE4LS40LjkxOC0uODkyVjExSDl6Ii8+PC9nPjwvc3ZnPg=="
+                                alt="" class="px-3">MY ORDERS</span>
+                    </div>
+                    <div class="pt-5 pb-3" style="border-bottom: 3px solid rgb(246,246,246)">
+                        <div>
+                            <span class="settings-account-settings"><img
+                                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0ia0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMSIgdmlld0JveD0iMCAwIDIyIDIxIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC05LjY5NCAtMTApIj48cGF0aCBmaWxsPSIjMjg3NEYwIiBkPSJNMTQuMjc1IDIyLjcwNGMyLjI3Mi0uNDEyIDQuMzQ3LS42MTggNi4yMjUtLjYxOCAxLjg3OCAwIDMuOTUzLjIwNiA2LjIyNS42MThhNS4xNSA1LjE1IDAgMCAxIDQuMjMgNS4wNjhWMzFoLTIwLjkxdi0zLjIyOGE1LjE1IDUuMTUgMCAwIDEgNC4yMy01LjA2OHptMS4yNzQtNy43MjRjMC0yLjU4IDIuMTYzLTQuNjczIDQuODMyLTQuNjczIDIuNjY3IDAgNC44MyAyLjA5MiA0LjgzIDQuNjczIDAgMi41OC0yLjE2MyA0LjY3My00LjgzIDQuNjczLTIuNjcgMC00LjgzMy0yLjA5Mi00LjgzMy00LjY3M3oiLz48ZWxsaXBzZSBjeD0iMjAuNTU3IiBjeT0iMjAiIHJ4PSIyMC41NTciIHJ5PSIyMCIvPjwvZz48L3N2Zz4="
+                                    alt="" class="px-3">ACCOUNT SETTINGS</span>
+                        </div>
+                        <div>
+                            <div class="px-5 pt-3 button-hov" id="profile-link">
+                                <button class="remove-button-style mb-3" onclick="showProfile()">Profile Information</button>
+                            </div>
+                            <div class="px-5 pt-3 button-hov" id="manage-address-link">
+                                <button class="remove-button-style mb-3" onclick="manageAddress()">Manage Addresses</button>
+                            </div>
+                            <div class="px-5 pt-3 button-hov">
+                                <button class="remove-button-style mb-3">Pan Card Information</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-5 pb-3" style="border-bottom: 3px solid rgb(246,246,246)">
+                        <div>
+                            <span class="settings-account-settings"><img
+                                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHcDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMyIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDIzIDIyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC05LjY5NCAtOSkiPjxlbGxpcHNlIGN4PSIyMC41NTciIGN5PSIyMCIgcng9IjIwLjU1NyIgcnk9IjIwIi8+PHBhdGggZD0iTTcgNmgyOHYyOEg3eiIvPjxwYXRoIGZpbGw9IiMyODc0RjAiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTMxLjUgMjd2MS4xNjdhMi4zNCAyLjM0IDAgMCAxLTIuMzMzIDIuMzMzSDEyLjgzM2EyLjMzMyAyLjMzMyAwIDAgMS0yLjMzMy0yLjMzM1YxMS44MzNBMi4zMzMgMi4zMzMgMCAwIDEgMTIuODMzIDkuNWgxNi4zMzRhMi4zNCAyLjM0IDAgMCAxIDIuMzMzIDIuMzMzVjEzSDIxYTIuMzMzIDIuMzMzIDAgMCAwLTIuMzMzIDIuMzMzdjkuMzM0QTIuMzMzIDIuMzMzIDAgMCAwIDIxIDI3aDEwLjV6TTIxIDI0LjY2N2gxMS42Njd2LTkuMzM0SDIxdjkuMzM0em00LjY2Ny0yLjkxN2MtLjk3IDAtMS43NS0uNzgyLTEuNzUtMS43NXMuNzgtMS43NSAxLjc1LTEuNzVjLjk2OCAwIDEuNzUuNzgyIDEuNzUgMS43NXMtLjc4MiAxLjc1LTEuNzUgMS43NXoiLz48L2c+PC9zdmc+"
+                                    alt="" class="px-3">PAYMENTS</span>
+                        </div>
+                        <div>
+                            <div class="px-5 pt-3 button-hov">
+                                <button class="remove-button-style mb-3">Gift Cards</button>
+                            </div>
+                            <div class="px-5 pt-3 button-hov">
+                                <button class="remove-button-style mb-3">Saved UPI</button>
+                            </div>
+                            <div class="px-5 pt-3 button-hov">
+                                <button class="remove-button-style mb-3">Saved Cards</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-5 pb-3" style="border-bottom: 3px solid rgb(246,246,246)">
+                        <div>
+                            <span class="settings-account-settings"><img
+                                    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dyMy5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMyIgaGVpZ2h0PSIxOSIgdmlld0JveD0iMCAwIDIzIDE5Ij48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiMyODc0RjAiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTIwLjUgMi43NWgtOUw5LjI1LjVIMi41QTIuMjQ3IDIuMjQ3IDAgMCAwIC4yNiAyLjc1bC0uMDEgMTMuNUEyLjI1NyAyLjI1NyAwIDAgMCAyLjUgMTguNWgxOGEyLjI1NyAyLjI1NyAwIDAgMCAyLjI1LTIuMjVWNWEyLjI1NyAyLjI1NyAwIDAgMC0yLjI1LTIuMjV6bS01LjYyNSAzLjM3NWEyLjI1NyAyLjI1NyAwIDAgMSAyLjI1IDIuMjUgMi4yNTcgMi4yNTcgMCAwIDEtMi4yNSAyLjI1IDIuMjU3IDIuMjU3IDAgMCAxLTIuMjUtMi4yNSAyLjI1NyAyLjI1NyAwIDAgMSAyLjI1LTIuMjV6bTQuNSA5aC05VjE0YzAtMS40OTYgMy4wMDQtMi4yNSA0LjUtMi4yNXM0LjUuNzU0IDQuNSAyLjI1djEuMTI1eiIvPjxwYXRoIGQ9Ik0tMi00aDI3djI3SC0yeiIvPjwvZz48L3N2Zz4="
+                                    alt="" class="px-3">MY STUFF</span>
+                        </div>
+                        <div>
+                            <div class="px-5 pt-3 button-hov">
+                                <button class="remove-button-style mb-3">My Coupons</button>
+                            </div>
+                            <div class="px-5 pt-3 button-hov">
+                                <button class="remove-button-style mb-3">My Reviews & Ratings</button>
+                            </div>
+                            <div class="px-5 pt-3 button-hov">
+                                <button class="remove-button-style mb-3">All Notifications</button>
+                            </div>
+                            <div class="px-5 pt-3 button-hov">
+                                <button class="remove-button-style mb-3">My Wishlist</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="py-4">
+                        <span class="settings-logout pt-3"><img src="" alt="" class="px-3">Logout</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-3 py-3">
+                <!-- <div class="settings-profile-name pt-3 px-3 py-3 settings-frequent">
+                    Frequently Visited:
+                    <div class="d-flex ">
+                        <div class="frequent-button-style"><button class="remove-button-style pt-3">Track Order</button>
+                        </div>
+                        <div class="frequent-button-style"><button class="remove-button-style pt-3">Help Center</button>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Main content area with gap and white background -->
+        <div class="main-content pt-3 bg-dark p-5 px-5" style="width: 75%; margin-left: 16px;" id="main-content">
+            <div>
+          
+        
+                <!-- FAQs Section -->
+                <div class="pt-5 faqs">
+                    <div>FAQ's</div>
+                    <div class="pt-3 fs-6">
+                        What happens when I update my email address (or mobile number)?
+                        <div class="fw-light pt-2">
+                            Your login email id (or mobile number) changes, likewise. You'll receive all your account-related communication on your updated email address (or mobile number).
+                        </div>
+                    </div>
+                    <div class="pt-3 fs-6">
+                        Does my Seller account get affected when I update my email address?
+                        <div class="fw-light pt-2">
+                            We have a 'single sign-on' policy. Any changes will reflect in your Seller account also.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pt-5">
+                            <button class="account-action-btn remove-button-style fs-6 deaacc-color">Deactivate Account</button>
+                            <button class="account-action-btn remove-button-style fs-6 deleacc-color">Delete Account</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        

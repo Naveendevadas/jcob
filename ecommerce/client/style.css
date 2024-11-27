@@ -1,0 +1,324 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "popins", sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 70px;
+  height: 100vh;
+
+}
+
+.form-container {
+  display: flex;
+  /* align-items: center; */
+  width: 35vw;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  /* border: 1px solid gray; */
+  border-radius: 19px;
+  transition: all ease-in-out 300ms;
+
+
+}
+
+.form-image {
+  width: 40vw;
+  height: 31vh;
+
+}
+
+form {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  gap: 14px;
+  border: none;
+  opacity: .8;
+  border-radius: 10px;
+  transition: all ease-in-out 300ms;
+
+}
+
+button:hover {
+  color: black;
+
+}
+
+.form-row {
+  transition: all ease-in-out 300ms;
+}
+
+
+form input,
+textarea {
+  width: 30vw;
+  border: 1px solid rgb(190, 190, 190);
+  outline: none;
+  font-size: 14px;
+  border-radius: 3px;
+  padding: 8px;
+}
+
+input ::placeholder-shown {
+  font-size: 14px;
+  color: rgb(0, 128, 0);
+}
+
+.login-txt {
+  font-size: 28px;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: #0b0512;
+  font-weight: 700;
+}
+
+
+/* .img-section span{
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+     */
+
+
+.pass {
+  width: 90%;
+  text-align: center;
+}
+
+.forgot-pass {
+  font-size: 12px;
+  width: 100%;
+  color: blue;
+
+}
+
+.line {
+  position: relative;
+  width: 90%;
+  height: 1px;
+  background-color: rgb(196, 196, 196);
+  margin-top: 8px;
+  margin-bottom: 8px;
+  top: 0;
+}
+
+.or {
+  position: absolute;
+  top: -8px;
+  text-align: center;
+  width: 100%;
+
+
+}
+
+.or span {
+  background-color: rgb(255, 255, 255);
+  padding: 6px;
+  font-size: 12px;
+  color: gray;
+}
+
+.signup-txt {
+  width: 90%;
+  text-align: center;
+}
+
+.signup-txt a,
+span {
+  font-size: 12px;
+  color: gray;
+
+}
+
+.signup-txt a {
+  color: blue;
+}
+
+/* From Uiverse.io by alexroumi */
+.button-log {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 15px;
+  width: 30vw;
+  border: unset;
+  border-radius: 10px;
+  color: #e8e8e8;
+  z-index: 1;
+  background: linear-gradient(-45deg, #d2ce05 0%, #1fc61f 100%);
+
+
+  font-weight: 1000;
+  font-size: 17px;
+  /* -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27); */
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+  transition: all 250ms;
+  overflow: hidden;
+}
+
+/* getallproducts */
+.watch-nav {
+  position: fixed;
+
+}
+
+.watch-logo {
+  background-color: transparent;
+}
+
+.watch-logo img {
+  width: 20vw;
+  padding: 30px 2px 0px 30px;
+}
+
+.watches-img {
+  width: 35vw;
+}
+
+.baground {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+/* .....add product cssss,...... */
+
+/* ......settings page..... */
+body{
+  background-color: rgb(33,37,41);
+  color: white;
+}
+.settings-profile-name {
+  width: 309.5px;
+  height: 74px;
+  background-color: rgb(33,37,41)
+}
+
+.f-nav-p {
+  background-color: rgb(17, 14, 14);
+}
+
+
+.remove-button-style {
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-align: inherit;
+  text-decoration: none;
+  box-shadow: none;
+  margin-right: 10px;
+}
+
+.settings-side-nav {
+  background-color: rgb(69, 72, 74);
+  width: 309.5px;
+}
+
+.settings-my-order,
+.settings-account-settings,
+.settings-payment {
+  color: rgb(0, 0, 0);
+  border-bottom: 1px rgb(140, 141, 140);
+  font-size: 16px;
+  font-weight: 600px;
+}
+
+.button-hov:hover {
+  background-color: rgb(39, 38, 38);
+  color: rgb(250, 7, 7);
+}
+
+.settings-logout {
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+}
+
+.frequent-button-style {
+  color: rgb(98, 98, 98);
+}
+
+/* .main-content {
+  margin-left: 16px;
+  background-color: rgb(248, 10, 10);
+  width: 75%;
+} */
+
+.personalInformation{
+  font-weight: 500;
+}
+
+.faqs{
+  font-weight: 500;
+  font-size: 18px;
+}.account-action-btn {
+  display: block; /* Makes buttons stack vertically */
+
+  margin-bottom: 10px; /* Adds space between the buttons */
+  
+}
+.deleacc-color{
+  color: rgb(215, 46, 46);
+}
+.deaacc-color,.edit-button-color{
+  color: rgb(54, 90, 252);
+}
+
+.manage-adress-text{
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 25.2px;
+  color: rgb(33, 33, 33);
+  font-family: Inter, -apple-system, Helvetica, Arial, sans-serif;
+}
+
+.input-container {
+  position: relative;
+  display: inline-block;
+}
+
+.lBFHyk {
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  font-size: 14px;
+  color: var(--color-grey-grade4);
+  transition: transform 0.2s ease, font-size 0.2s ease, top 0.2s ease;
+  pointer-events: none;  /* Makes sure the label does not interfere with input clicks */
+}
+
+input:focus + .lBFHyk,
+input:not(:placeholder-shown) + .lBFHyk {
+  transform: translateY(-22px);  /* Moves label up */
+  font-size: 12px;  /* Reduces font size */
+  top: 0px;  /* Adjusts the top position */
+}
+
+input {
+  padding: 18px 20px 0;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007bff;  /* Optional: Add border color change when focus */
+}
+

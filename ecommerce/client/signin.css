@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .image-size {
+    width: 42px;
+  }
+  
+  .inputGroup {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 1em 0;
+    max-width: 100%;
+    position: relative;
+  }
+  
+  .inputGroup input,
+  .inputGroup select {
+    font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+    border: 2px solid rgb(145, 143, 143);
+    background-color: transparent;
+    border-radius: 20px;
+    width: 100%;
+    appearance: none; /* Removes default select box styling */
+  }
+  
+  .inputGroup label {
+    font-size: 100%;
+    position: absolute;
+    left: 0;
+    padding: 0.8em;
+    margin-left: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: rgb(100, 100, 100);
+  }
+  
+  .inputGroup input:focus,
+  .inputGroup input:valid,
+  .inputGroup select:focus,
+  .inputGroup select:valid {
+    border-color: rgb(150, 150, 200);
+  }
+  
+  .inputGroup input:focus ~ label,
+  .inputGroup input:valid ~ label,
+  .inputGroup select:focus ~ label,
+  .inputGroup select:valid ~ label {
+    transform: translateY(-50%) scale(.9);
+    margin: 0em;
+    margin-left: 1.3em;
+    padding: 0.4em;
+    background-color: #ffffff;
+  }
+
+  .create-account-button{
+  border-radius: 4em;
+  padding: 10px;
+  }
+  a{
+    text-decoration: none;
+  }
+  
