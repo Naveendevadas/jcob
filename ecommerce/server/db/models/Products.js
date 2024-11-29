@@ -35,17 +35,15 @@ let Products = new mongoose.Schema({
         default: 0
     },
 
-    image: {
-        type: String,
-    },
+    image: [
+        {
+            type: String,
+        }
+    ],
 
     category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "category"
     }, 
-    
-    Products: {
-        type: String,
-    },
 });
 module.exports = mongoose.model("products", Products)

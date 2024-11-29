@@ -4,8 +4,12 @@ exports.fileUpload = async function (file, directory) {
     console.log("fileupload function executed")
     return new Promise((resolve, reject) => {
         try {
-            let mime_type = file.split(";")[0].split(":")[1].split("/")[1];
-            console.log("mime_type :", mime_type);
+            let mime_type = "";
+if (file.includes(":") && file.includes("/")) {
+    mime_type = file.split(";")[0].split(":")[1].split("/")[1];
+}
+console.log("mime_type :", mime_type);
+
 
             if (mime_type === 'png' || mime_type === 'jpg' || mime_type === 'jpeg'|| mime_type === 'mp4' || mime_type === 'pdf') {
                 console.log("file type allowed..");

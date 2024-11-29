@@ -149,24 +149,24 @@ exports.getUserTypes = async function(req,res){
 //         // Check if Address exists and validate pincode
 //         // if (body.Address && body.Address.pincode) {
 //         //     const pincodeRegex = /^\d{6}$/;
-//         //     if (!pincodeRegex.test(body.Address.pincode)) {
-//         //         let response = error_function({
-//         //             success: false,
-//         //             statusCode: 400,
-//         //             message: "Pincode must be exactly 6 digits"
-//         //         });
-//         //         res.status(response.statusCode).send(response);
-//         //         return;
-//         //     }
-//         // } else {
-//         //     let response = error_function({
-//         //         success: false,
-//         //         statusCode: 400,
-//         //         message: "Address and pincode are required"
-//         //     });
-//         //     res.status(response.statusCode).send(response);
-//         //     return;
-//         // }
+        //     if (!pincodeRegex.test(body.Address.pincode)) {
+        //         let response = error_function({
+        //             success: false,
+        //             statusCode: 400,
+        //             message: "Pincode must be exactly 6 digits"
+        //         });
+        //         res.status(response.statusCode).send(response);
+        //         return;
+        //     }
+        // } else {
+        //     let response = error_function({
+        //         success: false,
+        //         statusCode: 400,
+        //         message: "Address and pincode are required"
+        //     });
+        //     res.status(response.statusCode).send(response);
+        //     return;
+        // }
 
 //         // Phone number validation (if needed, adjust your request to include a phone number)
 //         let phone = body.phone
@@ -354,7 +354,7 @@ exports.addProducts = async (req, res) => {
 
         category_value = category_value.toUpperCase().trim()
 
-        const Category = await category.findOne({category:category_value }).populate( "category"); 
+        const Category = await category.findOne({category:category_value}).populate({path : "category",select : "-__v"}); 
 
         if (!Category) {
             console.log("Category not found:", category_value); 
@@ -367,6 +367,7 @@ exports.addProducts = async (req, res) => {
         console.log("Category found:", Category);
 
         const data = {
+            sellerID:req.params.id,
             name: body.name,
             price: body.price,
             brand: body.brand,
@@ -433,5 +434,56 @@ exports.getAllProducts = async function (req, res) {
         });
     }
 };
+
+exports.singleProduct = async function (req,res) {
+    try {
+        const proId = req.params.id;
+        const id = proId.replace(':id=','');
+
+        if(!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).send({
+                success: false,
+                statusCode: 400,
+                message: "Invalid ID format",
+            });
+        }
+
+        const product = await Products.findById(id);
+
+        if (!product) {
+            let response = error_function({
+                success: false,
+                statusCode: 400,
+                message: "product not found"
+            });
+            res.status(response.statusCode).send(response);
+            return;
+        }
+     else {
+        let response = success_function({
+            success: true,
+            statusCode: 200,
+            message: "product fetch succesfull",
+            data : product,
+            
+        });
+        res.status(response.statusCode).send(response);
+        return;
+        }
+        
+
+
+    } catch (error) {
+        console.error("Error fetching product:", error);
+
+        // Handle server errors
+        return res.status(500).send({
+            success: false,
+            statusCode: 500,
+            message: "Internal server error",
+        });
+    }
+    
+}
 
 

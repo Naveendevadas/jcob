@@ -38,8 +38,13 @@ const users = new mongoose.Schema({
 
     cart: [
         {
-            product: { type: mongoose.Schema.Types.ObjectId, ref: 'Products' },
+            Products: { type: mongoose.Schema.Types.ObjectId, ref: 'Products' },
             quantity: Number,
+        },
+    ],
+    product: [
+        {
+            product : {type: mongoose.Schema.Types.ObjectId, ref: 'Products' }
         },
     ],
 })
