@@ -484,6 +484,14 @@ exports.singleProduct = async function (req,res) {
         });
     }
     
+};
+
+exports.addToCart = async function (res,req) { 
+    try {
+
+  } catch (error) {
+    res.status(500).send({ success: false, message: 'Error adding product to cart', error });
+  }
 }
 
 
