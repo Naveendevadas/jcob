@@ -36,9 +36,11 @@ let Products = new mongoose.Schema({
     },
 
     image: [
+
         {
-            type: String,
+            type: String
         }
+        
     ],
 
     category: {

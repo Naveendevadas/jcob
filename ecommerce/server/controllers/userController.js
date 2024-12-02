@@ -373,7 +373,7 @@ exports.addProducts = async (req, res) => {
             brand: body.brand,
             stock: body.stock,
             category: Category._id,
-            image: "" , // Assign image from the request body
+            image: image || "", // Assign image from the request body
         };
 
         if (image) {
@@ -448,7 +448,7 @@ exports.singleProduct = async function (req,res) {
             });
         }
 
-        const product = await Products.findById(id);
+        const product = await Products.findById(id).populate({path : "category",select : "-__v"});
 
         if (!product) {
             let response = error_function({

@@ -16,7 +16,7 @@ app.use("/upload",express.static("./upload"));
 
 mongoConnect();
 
-app.use(express.json({ limit: "10000mb" }));
+app.use(express.json({ limit: "1000mb" }));
 
 
 app.use(express.urlencoded({extended : true}));
