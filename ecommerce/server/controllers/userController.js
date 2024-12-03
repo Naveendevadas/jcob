@@ -1,10 +1,10 @@
 const users = require('../db/models/users');
-const user_type = require("../db/models/user_type"); 
+const user_type = require("../db/models/user_type");
 const category = require("../db/models/category")
 const bcrypt = require('bcrypt');
-const { success_function, error_function } = require("../utils/responseHandler"); 
+const { success_function, error_function } = require("../utils/responseHandler");
 const mongoose = require("mongoose");
-const fileUpload=require("../utils/file-upload").fileUpload;
+const uploadBase64Images = require("../utils/file-upload").uploadBase64Images;
 const Products = require('../db/models/Products');
 const { count } = require('console');
 
@@ -14,9 +14,9 @@ exports.createuser = async (req, res) => {
         console.log("Received body:", body);
 
         let password = body.password;
-        let user_type_value = body.user_type; 
+        let user_type_value = body.user_type;
 
-        
+
         if (!user_type_value) {
             return res.status(400).send(error_function({
                 statusCode: 400,
@@ -24,14 +24,14 @@ exports.createuser = async (req, res) => {
             }));
         }
 
-        
+
         user_type_value = user_type_value.toLowerCase().trim();
 
-        
-        const UserType = await user_type.findOne({user_type:user_type_value }); 
+
+        const UserType = await user_type.findOne({ user_type: user_type_value });
 
         if (!UserType) {
-            console.log("User type not found:", user_type_value); 
+            console.log("User type not found:", user_type_value);
             return res.status(400).send(error_function({
                 statusCode: 400,
                 message: "Invalid user type"
@@ -40,7 +40,7 @@ exports.createuser = async (req, res) => {
 
         console.log("UserType found:", UserType);
 
-        
+
         let salt = bcrypt.genSaltSync(10);
         let hashed_password = bcrypt.hashSync(password, salt);
 
@@ -48,29 +48,29 @@ exports.createuser = async (req, res) => {
         //check email
 
         let existingUser = await users.countDocuments({ email: email_ing });
-        console.log("count : " , existingUser)
-                    if (existingUser > 0) {
-                        let response = error_function({
-                            success: false,
-                            statusCode: 400,
-                            message: "Email Already Exist"
-                        });
-                        res.status(response.statusCode).send(response);
-                        return;
-                    }
+        console.log("count : ", existingUser)
+        if (existingUser > 0) {
+            let response = error_function({
+                success: false,
+                statusCode: 400,
+                message: "Email Already Exist"
+            });
+            res.status(response.statusCode).send(response);
+            return;
+        }
 
 
 
-        
+
         let randombody = {
             // name: body.name,
             email: body.email,
             password: hashed_password,
             // phoneno: body.phoneno,
-            user_type: UserType._id, 
+            user_type: UserType._id,
         };
 
-    
+
         let new_user = await users.create(randombody);
 
         if (new_user) {
@@ -99,29 +99,29 @@ exports.createuser = async (req, res) => {
         return;
     }
 };
-exports.getUserTypes = async function(req,res){
+exports.getUserTypes = async function (req, res) {
     try {
         let selectUserTypes = await user_type.find();
-       
 
-        if(selectUserTypes){
+
+        if (selectUserTypes) {
             let response = success_function({
-                success : true,
-                statusCode : 200,
-                message : "successfully fetched the userTypes",
-                data : selectUserTypes
+                success: true,
+                statusCode: 200,
+                message: "successfully fetched the userTypes",
+                data: selectUserTypes
             });
             res.status(response.statusCode).send(response);
             return;
         }
     } catch (error) {
-        console.log('error',error);
+        console.log('error', error);
 
         let response = error_function({
-            success : false,
-            statusCode : 400,
-            message : "userType fetching failed",
-            
+            success: false,
+            statusCode: 400,
+            message: "userType fetching failed",
+
         });
         res.status(response.statusCode).send(response)
         return;
@@ -149,24 +149,24 @@ exports.getUserTypes = async function(req,res){
 //         // Check if Address exists and validate pincode
 //         // if (body.Address && body.Address.pincode) {
 //         //     const pincodeRegex = /^\d{6}$/;
-        //     if (!pincodeRegex.test(body.Address.pincode)) {
-        //         let response = error_function({
-        //             success: false,
-        //             statusCode: 400,
-        //             message: "Pincode must be exactly 6 digits"
-        //         });
-        //         res.status(response.statusCode).send(response);
-        //         return;
-        //     }
-        // } else {
-        //     let response = error_function({
-        //         success: false,
-        //         statusCode: 400,
-        //         message: "Address and pincode are required"
-        //     });
-        //     res.status(response.statusCode).send(response);
-        //     return;
-        // }
+//     if (!pincodeRegex.test(body.Address.pincode)) {
+//         let response = error_function({
+//             success: false,
+//             statusCode: 400,
+//             message: "Pincode must be exactly 6 digits"
+//         });
+//         res.status(response.statusCode).send(response);
+//         return;
+//     }
+// } else {
+//     let response = error_function({
+//         success: false,
+//         statusCode: 400,
+//         message: "Address and pincode are required"
+//     });
+//     res.status(response.statusCode).send(response);
+//     return;
+// }
 
 //         // Phone number validation (if needed, adjust your request to include a phone number)
 //         let phone = body.phone
@@ -249,10 +249,10 @@ exports.getUserTypes = async function(req,res){
 //     }
 // };
 
-exports.getAllUsers = async function(req, res) {
+exports.getAllUsers = async function (req, res) {
     try {
         // Fetch all users from the database
-        let user = await users.find().populate({path : "user_type",select : "-__v"});
+        let user = await users.find().populate({ path: "user_type", select: "-__v" });
 
         // Log the retrieved users
         console.log("Fetched users:", user);
@@ -277,11 +277,11 @@ exports.getAllUsers = async function(req, res) {
             data: user
         };
         res.status(response.statusCode).send(response);
-        
+
     } catch (error) {
         // Log the error
         console.log("Error fetching users:", error);
-        
+
         // Send an error response
         let response = error_function({
             success: false,
@@ -307,7 +307,7 @@ exports.getSingleUser = async function (req, res) {
         }
 
         // Query the database
-        const user = await users.findById(id).populate({path : "user_type",select : "-__v"}); // Replace `users` with your actual model name
+        const user = await users.findById(id).populate({ path: "user_type", select: "-__v" }); // Replace `users` with your actual model name
 
         if (!user) {
             return res.status(404).send({
@@ -336,84 +336,60 @@ exports.getSingleUser = async function (req, res) {
     }
 };
 
-
-exports.addProducts = async (req, res) => {
+exports.addProducts = async function (req, res) {
     try {
-        const body = req.body;
- 
-        // Ensure the 'image' field is passed in the request body or handle it appropriately
-        const image = body.image;  // Assuming the image URL or path is passed in the request body
-        let category_value = body.category; 
+        console.log("Request Body:", req.body);
+        console.log("Seller ID:", req.params.id);
 
-        if (!category_value) {
-            return res.status(400).send(error_function({
-                statusCode: 400,
-                message: "category is required"
-            }));
+        const sellerID = req.params.id;
+
+        // Validate seller ID
+        if (!sellerID) {
+            return res.status(400).send({ success: false, message: "Seller ID is required" });
         }
 
-        category_value = category_value.toUpperCase().trim()
-
-        const Category = await category.findOne({category:category_value}).populate({path : "category",select : "-__v"}); 
-
-        if (!Category) {
-            console.log("Category not found:", category_value); 
-            return res.status(400).send(error_function({
-                statusCode: 400,
-                message: "Invalid category"
-            }));
+        // Validate category
+        const matchedCategory = await category.findOne({ category: req.body.category });
+        if (!matchedCategory) {
+            return res.status(400).send({ success: false, message: "Invalid category" });
         }
 
-        console.log("Category found:", Category);
+        // Handle base64-encoded images
+        
+        let image = [];
+        if (req.body.image && Array.isArray(req.body.image)) {
+            image = await uploadBase64Images(req.body.image, sellerID, req.body.altText);
+        } else {
+            return res.status(400).send({ success: false, message: "No images provided" });
+        }
 
-        const data = {
-            sellerID:req.params.id,
+        // Create the new product
+        const newProduct = new Products({
+            sellerID,
             name: body.name,
             price: body.price,
-            brand: body.brand,
-            stock: body.stock,
-            category: Category._id,
-            image: image || "", // Assign image from the request body
-        };
+            category: matchedCategory._id,
+            image,
+        });
 
-        if (image) {
-            // Check if the image is in base64 format
-            const regExp = /^data:/;
-            const result = regExp.test(image);
-
-            if (result) {
-                // Image is in base64 format, so upload it and get the path
-                const img_path = await fileUpload(image, "user");  // Upload the image
-                console.log("img_path:", img_path);
-
-                // Update the image path in the 'body' and 'data'
-                body.image = img_path;  // Set the image path
-                data.image = img_path;  // Set the image path for the new product
-            }
-        }
-
-        // Assuming AddData is the model for inserting into the database
-        const products = await Products.create(data);
-        console.log(products);
-
-        res.status(200).send({
+        // Save to database
+        const productDetails = await newProduct.save();
+        return res.status(200).send({
             success: true,
             message: "Product added successfully",
-            data: products
+            data: productDetails,
         });
     } catch (error) {
-        console.error(error); // Log the error for debugging
-        res.status(400).send({
-            success: false,
-            message: "Error adding product"
-        });
+        console.error("Error adding product:", error);
+        return res.status(500).send({ success: false, message: "Product adding failed, please try again." });
     }
-}; 
+};
+
 
 exports.getAllProducts = async function (req, res) {
     try {
         let productData = await Products.find()
-            .populate({ path: "category", select: "-__v" })
+            .populate({ path: "category", })
             .select("-__v");
 
         console.log("productData:", productData);
@@ -435,12 +411,12 @@ exports.getAllProducts = async function (req, res) {
     }
 };
 
-exports.singleProduct = async function (req,res) {
+exports.singleProduct = async function (req, res) {
     try {
         const proId = req.params.id;
-        const id = proId.replace(':id=','');
+        const id = proId.replace(':id=', '');
 
-        if(!mongoose.Types.ObjectId.isValid(id)) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).send({
                 success: false,
                 statusCode: 400,
@@ -448,7 +424,7 @@ exports.singleProduct = async function (req,res) {
             });
         }
 
-        const product = await Products.findById(id).populate({path : "category",select : "-__v"});
+        const product = await Products.findById(id).populate({ path: "category", select: "-__v" });
 
         if (!product) {
             let response = error_function({
@@ -459,18 +435,18 @@ exports.singleProduct = async function (req,res) {
             res.status(response.statusCode).send(response);
             return;
         }
-     else {
-        let response = success_function({
-            success: true,
-            statusCode: 200,
-            message: "product fetch succesfull",
-            data : product,
-            
-        });
-        res.status(response.statusCode).send(response);
-        return;
+        else {
+            let response = success_function({
+                success: true,
+                statusCode: 200,
+                message: "product fetch succesfull",
+                data: product,
+
+            });
+            res.status(response.statusCode).send(response);
+            return;
         }
-        
+
 
 
     } catch (error) {
@@ -483,15 +459,15 @@ exports.singleProduct = async function (req,res) {
             message: "Internal server error",
         });
     }
-    
+
 };
 
-exports.addToCart = async function (res,req) { 
+exports.addToCart = async function (res, req) {
     try {
 
-  } catch (error) {
-    res.status(500).send({ success: false, message: 'Error adding product to cart', error });
-  }
+    } catch (error) {
+        res.status(500).send({ success: false, message: 'Error adding product to cart', error });
+    }
 }
 
 

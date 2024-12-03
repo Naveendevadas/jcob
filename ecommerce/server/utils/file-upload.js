@@ -1,62 +1,37 @@
-const dayjs = require('dayjs');
 const fs = require('fs');
+const path = require('path');
+const dayjs = require('dayjs');
 
-exports.fileUpload = async function (file, directory) {
-    console.log("fileUpload function executed");
+const uploadBase64Images = async (base64Images, directory, altText) => {
+    try {
+        const image = [];
+        for (const base64Image of base64Images) {
+            const mimeType = base64Image.split(';')[0].split(':')[1];
+            const extension = mimeType.split('/')[1];
+            const filename = `${dayjs().format('YYYYMMDDHHmmss')}-${Math.random()
+                .toString(36)
+                .substr(2, 9)}.${extension}`;
+            const uploadDir = path.join(__dirname, '..', 'uploads', directory);
 
-    return new Promise((resolve, reject) => {
-        try {
-            // Extract mime type from the file string (base64)
-            let mime_type = "";
-            if (file.includes(":") && file.includes("/")) {
-                mime_type = file.split(";")[0].split(":")[1].split("/")[1];
-            }
-            console.log("mime_type:", mime_type);
+            // Ensure the upload directory exists
+            fs.mkdirSync(uploadDir, { recursive: true });
 
-            // Check if the file type is allowed
-            if (mime_type === 'png' || mime_type === 'jpg' || mime_type === 'jpeg' || mime_type === 'mp4' || mime_type === 'pdf') {
-                console.log("File type allowed..");
+            const filePath = path.join(uploadDir, filename);
+            const base64Data = base64Image.split(';base64,').pop();
 
-                // Generate a unique file name with dayjs and a random number
-                let file_name = `${dayjs().format('YYYY-MM-DD_HH-mm-ss')}_${Math.floor(Math.random() * 100)}.${mime_type}`;
-                console.log("file_name:", file_name);
+            // Write the file to disk
+            fs.writeFileSync(filePath, base64Data, { encoding: 'base64' });
 
-                let upload_path = `upload/${directory}`;
-                console.log("upload_path:", upload_path);
-
-                // Get the base64 content of the file
-                let base64 = file.split(';base64,')[1];
-
-                // Create the upload directory if it doesn't exist
-                fs.mkdir(upload_path, { recursive: true }, (err) => {
-                    if (err) {
-                        console.log("Error creating directory:", err);
-                        reject(err.message || err);
-                    } else {
-                        // Define the final path where the file will be saved
-                        let file_upload_path = `${upload_path}/${file_name}`;
-                        console.log("file_upload_path:", file_upload_path);
-
-                        // Write the file to the disk
-                        fs.writeFile(file_upload_path, base64, { encoding: 'base64' }, (err) => {
-                            if (err) {
-                                console.log("Error writing file:", err);
-                                reject(err.message || err);
-                            } else {
-                                resolve(file_upload_path); // Return the file path upon success
-                            }
-                        });
-                    }
-                });
-
-            } else {
-                // Invalid file type
-                console.log("Invalid file type");
-                reject("Only .png, .jpeg, .jpg, .mp4, and .pdf are allowed");
-            }
-        } catch (error) {
-            console.log("Error:", error);
-            reject(error.message || error);
+            image.push({ url: filePath, alt: altText || 'Product Image' });
         }
-    });
+
+        return image; // Return array of uploaded image objects
+    } catch (err) {
+        console.error("Error saving images:", err);
+        throw new Error("Error processing images");
+    }
+};
+
+module.exports = {
+    uploadBase64Images,
 };

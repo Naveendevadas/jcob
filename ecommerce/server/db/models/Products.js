@@ -38,7 +38,8 @@ let Products = new mongoose.Schema({
     image: [
 
         {
-            type: String
+            url: { type: String, required: true },
+            alt: { type: String }
         }
         
     ],
