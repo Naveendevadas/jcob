@@ -11,7 +11,7 @@ const uploadBase64Images = async (base64Images, directory, altText) => {
             const filename = `${dayjs().format('YYYYMMDDHHmmss')}-${Math.random()
                 .toString(36)
                 .substr(2, 9)}.${extension}`;
-            const uploadDir = path.join(__dirname, '..', 'uploads', directory);
+            const uploadDir = path.join('uploads', directory);
 
             // Ensure the upload directory exists
             fs.mkdirSync(uploadDir, { recursive: true });

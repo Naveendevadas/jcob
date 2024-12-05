@@ -341,6 +341,8 @@ exports.addProducts = async function (req, res) {
         console.log("Request Body:", req.body);
         console.log("Seller ID:", req.params.id);
 
+        const body = req.body;
+
         const sellerID = req.params.id;
 
         // Validate seller ID
@@ -367,6 +369,7 @@ exports.addProducts = async function (req, res) {
         const newProduct = new Products({
             sellerID,
             name: body.name,
+            stock : body.stock,
             price: body.price,
             category: matchedCategory._id,
             image,
