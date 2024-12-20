@@ -1,10 +1,12 @@
 import React from "react";
 
-const Order = () => {
+const Contact = () => {
     return(
         <div>
-            orders
+            contact
+
         </div>
     )
 }
-export default Order
+
+export default Contact

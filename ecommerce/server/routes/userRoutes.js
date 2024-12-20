@@ -8,5 +8,6 @@ router.get('/getallusers',userController.getAllUsers)
 router.get('/getallproducts',userController.getAllProducts)
 router.get('/getSingleUser/:id',userController.getSingleUser)
 router.get('/singleProduct/:id',userController.singleProduct)
+router.get('/getProducts/:id',userController.getProductsBySeller)
 
 module.exports=router

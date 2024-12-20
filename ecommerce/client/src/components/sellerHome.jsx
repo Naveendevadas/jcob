@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import "../CSS/nav.css"
-import NavBar from "../Components/Navbar";
-// import Footer from "./footer";
+import "./css/style.css"
+import NavBar from "./nav";
+import Footer from "./footer";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -51,7 +51,7 @@ const ProductList = () => {
       const token = localStorage.getItem("authToken");
       if (!token) {
         alert("Please login to add items to the cart.");
-        navigate("/Signin");
+        navigate("/signin");
         return;
       }
 
@@ -69,7 +69,7 @@ const ProductList = () => {
       );
       setCart(response.data.cart);
       alert("aded to cart")
-      navigate('/Cart');
+      navigate('/cart');
 
 
     } catch (error) {
@@ -81,7 +81,7 @@ const ProductList = () => {
         // Token invalid or expired
         localStorage.removeItem("authToken");
         alert("Session expired. Please log in again.");
-        navigate("/Signin");
+        navigate("/signin");
       } else if (status === 400) {
         setMessage("Invalid request. Please check the product.");
       } else if (status === 500) {
@@ -164,7 +164,7 @@ const ProductList = () => {
         ))}
       </div>
     </div>
-    {/* <Footer/> */}
+    <Footer/>
     </>
   );
 };

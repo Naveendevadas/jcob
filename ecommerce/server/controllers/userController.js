@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const uploadBase64Images = require("../utils/file-upload").uploadBase64Images;
 const Products = require('../db/models/Products');
 const { count } = require('console');
+const jwt = require('jsonwebtoken');
+const Cart = require('../db/models/cart')
 
 exports.createuser = async (req, res) => {
     try {
@@ -99,6 +101,7 @@ exports.createuser = async (req, res) => {
         return;
     }
 };
+
 exports.getUserTypes = async function (req, res) {
     try {
         let selectUserTypes = await user_type.find();
@@ -128,126 +131,6 @@ exports.getUserTypes = async function (req, res) {
     }
 
 }
-
-// exports.signin = async function (req, res) {
-//     let body = req.body;
-//     console.log("body :", body);
-
-//     if (body) {
-//         // Email format validation
-//         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//         if (!emailRegex.test(body.email)) {
-//             let response = error_function({
-//                 success: false,
-//                 statusCode: 400,
-//                 message: "Invalid email format"
-//             });
-//             res.status(response.statusCode).send(response);
-//             return;
-//         }
-
-//         // Check if Address exists and validate pincode
-//         // if (body.Address && body.Address.pincode) {
-//         //     const pincodeRegex = /^\d{6}$/;
-//     if (!pincodeRegex.test(body.Address.pincode)) {
-//         let response = error_function({
-//             success: false,
-//             statusCode: 400,
-//             message: "Pincode must be exactly 6 digits"
-//         });
-//         res.status(response.statusCode).send(response);
-//         return;
-//     }
-// } else {
-//     let response = error_function({
-//         success: false,
-//         statusCode: 400,
-//         message: "Address and pincode are required"
-//     });
-//     res.status(response.statusCode).send(response);
-//     return;
-// }
-
-//         // Phone number validation (if needed, adjust your request to include a phone number)
-//         let phone = body.phone
-//         if (phone) {
-//             const phoneRegex = /^\d{10}$/;
-//             if (!phoneRegex.test(body.phone)) {
-//                 let response = error_function({
-//                     success: false,
-//                     statusCode: 400,
-//                     message: "Phone number must be exactly 10 digits"
-//                 });
-//                 res.status(response.statusCode).send(response);
-//                 return;
-//             }
-//         }
-
-
-//         try {
-//             // Check for duplicate email
-//             let existingUser = await user.findOne({ email: body.email });
-//             if (existingUser) {
-//                 let response = error_function({
-//                     success: false,
-//                     statusCode: 400,
-//                     message: "Email already exists"
-//                 });
-//                 res.status(response.statusCode).send(response);
-//                 return;
-//             }
-
-//             let users = await user_type.findOne({ user_type: body.user_type });
-//             if (!users) {
-//                 let response = error_function({
-//                     success: false,
-//                     statusCode: 400,
-//                     message: "Invalid user type"
-//                 });
-//                 res.status(response.statusCode).send(response);
-//                 return;
-//             }
-
-//             let id = users._id;
-//             body.user_type = id;
-
-//             // Hash the password
-//             const saltRounds = 10; // You can adjust the salt rounds for security
-//             body.password = await bcrypt.hash(body.password, saltRounds);
-
-//             // Create user and save to the database
-//             let data = await users.create(body);
-
-//             if (data) {
-//                 let response = success_function({
-//                     success: true,
-//                     statusCode: 200,
-//                     message: "Signup successful",
-//                     data: data
-//                 });
-//                 res.status(response.statusCode).send(response);
-//                 return;
-//             } else {
-//                 let response = error_function({
-//                     success: false,
-//                     statusCode: 400,
-//                     message: "Signup failed, try again"
-//                 });
-//                 res.status(response.statusCode).send(response);
-//                 return;
-//             }
-//         } catch (error) {
-//             console.log("error", error);
-//             let response = error_function({
-//                 success: false,
-//                 statusCode: 500,
-//                 message: "Something went wrong, try again"
-//             });
-//             res.status(response.statusCode).send(response);
-//             return;
-//         }
-//     }
-// };
 
 exports.getAllUsers = async function (req, res) {
     try {
@@ -388,7 +271,6 @@ exports.addProducts = async function (req, res) {
     }
 };
 
-
 exports.getAllProducts = async function (req, res) {
     try {
         let productData = await Products.find()
@@ -465,12 +347,23 @@ exports.singleProduct = async function (req, res) {
 
 };
 
-exports.addToCart = async function (res, req) {
+exports.getProductsBySeller = async (req, res) => {
     try {
-
+      const sellerId = req.params.sellerId;
+      console.log("Seller ID received:", sellerId); // Log received sellerId
+      const products = await AddData.find({ sellerID: sellerId });
+  
+      if (products.length === 0) {
+        return res.status(404).json({ message: "No products found for this seller." });
+      }
+  
+      return res.status(200).json({ success: true, products });
     } catch (error) {
-        res.status(500).send({ success: false, message: 'Error adding product to cart', error });
+      console.error("Error fetching products:", error); // Log error details
+      return res.status(500).json({ message: "Server error", error });
     }
-}
+  };
+  
+
 
 

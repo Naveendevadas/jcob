@@ -1,0 +1,106 @@
+/* Container for the entire form */
+.add-product-unique-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+.add-product-unique-container h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Message/Notification styles */
+.add-product-unique-container p {
+  text-align: center;
+  color: red;
+  font-weight: bold;
+}
+
+/* Form label styles */
+.add-product-unique-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Input fields styles */
+.add-product-unique-container input[type="text"],
+.add-product-unique-container input[type="number"],
+.add-product-unique-container input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.add-product-unique-container input[type="file"] {
+  cursor: pointer;
+}
+
+/* Input focus styles */
+.add-product-unique-container input:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+/* File input specific style */
+.add-product-unique-container .file-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.add-product-unique-container .file-input:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+/* Image preview styling */
+.add-product-unique-container .mt-4 {
+  margin-top: 20px;
+}
+
+.add-product-unique-container .flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.add-product-unique-container .gap-2 {
+  gap: 10px;
+}
+
+.add-product-unique-container img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Submit button styles */
+.add-product-unique-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.add-product-unique-container button:hover {
+  background-color: #0056b3;
+}

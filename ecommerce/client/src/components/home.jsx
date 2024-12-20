@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import "../CSS/nav.css"
-import NavBar from "../Components/Navbar";
-// import Footer from "./footer";
+import "./css/style.css"
+import NavBar from "./nav";
+import Footer from "./footer";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -46,15 +46,16 @@ const ProductList = () => {
 
   // Add to Cart function
   const addToCart = async (productId) => {
-
     try {
-      const token = localStorage.getItem("authToken");
-      if (!token) {
+      const tokenData = localStorage.getItem("Data");
+      if (!tokenData) {
         alert("Please login to add items to the cart.");
-        navigate("/Signin");
+        navigate("/signin");
         return;
       }
-
+      
+      const token = JSON.parse(tokenData).token;  // Assuming token is inside the data object
+  
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -64,14 +65,12 @@ const ProductList = () => {
 
       const response = await axios.post(
         `${backendUrl}/addCart`,
-        { productId},
+        { productId },
         config
       );
       setCart(response.data.cart);
-      alert("aded to cart")
-      navigate('/Cart');
-
-
+      alert("Added to cart");
+      navigate('/cart');
     } catch (error) {
       const status = error.response?.status;
       const errorMessage =
@@ -79,9 +78,9 @@ const ProductList = () => {
 
       if (status === 401) {
         // Token invalid or expired
-        localStorage.removeItem("authToken");
+        localStorage.removeItem("Data");
         alert("Session expired. Please log in again.");
-        navigate("/Signin");
+        navigate("/signin");
       } else if (status === 400) {
         setMessage("Invalid request. Please check the product.");
       } else if (status === 500) {
@@ -92,7 +91,8 @@ const ProductList = () => {
         setMessage(errorMessage);
       }
     }
-  };
+};
+
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -164,7 +164,7 @@ const ProductList = () => {
         ))}
       </div>
     </div>
-    {/* <Footer/> */}
+    <Footer/>
     </>
   );
 };

@@ -1,0 +1,108 @@
+/* sellerStyle.css */
+
+/* Style for the message box */
+.seller-message {
+  margin: 20px auto;
+  padding: 10px;
+  width: 80%;
+  border-radius: 8px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #4caf50; /* Success green */
+}
+
+/* Style for the form container */
+.seller-form {
+  margin: 20px auto;
+  padding: 15px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Inputs and buttons inside the form */
+.seller-form input {
+  margin: 10px 0;
+  padding: 8px;
+  width: calc(100% - 20px);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.seller-form button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.seller-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Style for the product list container */
+.seller-products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Individual product card */
+.seller-product {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  width: 250px;
+  text-align: center;
+  background-color: #fff;
+  transition: box-shadow 0.3s;
+}
+
+.seller-product:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.seller-product img {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.seller-product h3 {
+  margin: 10px 0;
+}
+
+.seller-product p {
+  color: #333;
+}
+
+.seller-product button {
+  margin: 5px;
+  padding: 8px 15px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.seller-product button:first-of-type {
+  background-color: #e74c3c; /* Delete button */
+}
+
+.seller-product button:first-of-type:hover {
+  background-color: #c0392b;
+}
+
+.seller-product button:last-of-type {
+  background-color: #3498db; /* Update button */
+}
+
+.seller-product button:last-of-type:hover {
+  background-color: #2980b9;
+}

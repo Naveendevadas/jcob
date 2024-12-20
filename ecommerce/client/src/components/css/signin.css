@@ -1,0 +1,155 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 70px;
+    height: 100vh;
+    background-image: url('/images/shoelogin.jpg');
+  }
+
+  .form-container {
+    display: flex;
+    width: 40vw;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    border-radius: 19px;
+    transition: all ease-in-out 300ms;
+  }
+  
+  form {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    border: none;
+    opacity: 3;
+    border-radius: 10px;
+    transition: all ease-in-out 300ms;
+  }
+  
+  form:hover {
+    padding: 40px;
+  }
+  
+  .form-container:hover {
+    width: 45vw;
+  }
+  
+  button:hover {
+    color: black;
+  }
+  
+  .form-row {
+    transition: all ease-in-out 300ms;
+  }
+  
+  .form-row:hover {
+    padding: 10px;
+  }
+  
+  form input,
+  textarea {
+    width: 30vw;
+    border: 1px solid rgb(190, 190, 190);
+    outline: none;
+    font-size: 14px;
+    border-radius: 3px;
+    padding: 8px;
+  }
+  
+  input::placeholder-shown {
+    font-size: 14px;
+    color: green;
+  }
+  
+  .login-txt {
+    font-size: 28px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 900;
+  }
+  
+  .line {
+    position: relative;
+    width: 90%;
+    height: 1px;
+    background-color: rgb(196, 196, 196);
+    margin-top: 8px;
+    margin-bottom: 8px;
+    top: 0;
+  }
+  
+  .or {
+    position: absolute;
+    top: -8px;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .or span {
+    background-color: rgb(255, 255, 255);
+    padding: 6px;
+    font-size: 12px;
+    color: gray;
+  }
+  
+  .signup-txt {
+    width: 90%;
+    text-align: center;
+  }
+  
+  .signup-txt a,
+  span {
+    font-size: 12px;
+    color: gray;
+  }
+  
+  .signup-txt a {
+    color: blue;
+  }
+  
+  .login-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 15px;
+    width: 30vw;
+    border: unset;
+    border-radius: 10px;
+    color: #e8e8e8;
+    background: linear-gradient(-45deg, #d2ce05 0%, #1fc61f 100%);
+    font-weight: 1000;
+    font-size: 17px;
+    transition: all 250ms;
+    overflow: hidden;
+  }
+  
+  .pass {
+    display: flex;
+    font-size: 15px;
+    gap: 30px;
+    text-decoration: none;
+  }
+  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  a:hover {
+    color: white;
+  }
+  
